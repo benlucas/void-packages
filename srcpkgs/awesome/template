@@ -7,7 +7,7 @@ build_helper="qemu"
 configure_args="-DSYSCONFDIR=/etc"
 conf_files="/etc/xdg/awesome/rc.lua"
 hostmakedepends="ruby-asciidoctor ImageMagick lua53-lgi lua53 pkg-config xmlto"
-makedepends="libxcb-devel pango-devel xcb-util-devel xcb-util-image-devel
+makedepends="git libxcb-devel pango-devel xcb-util-devel xcb-util-image-devel
  xcb-util-keysyms-devel xcb-util-wm-devel xcb-util-cursor-devel
  startup-notification-devel imlib2-devel lua53-lgi libxdg-basedir-devel
  gdk-pixbuf-devel lua53-devel dbus-devel libxkbcommon-devel xcb-util-xrm-devel"
@@ -16,8 +16,10 @@ short_desc="Highly configurable, next gen framework window manager for X"
 maintainer="Orphaned <orphan@voidlinux.org>"
 license="GPL-2.0-or-later"
 homepage="http://awesomewm.org"
-distfiles="https://github.com/awesomeWM/awesome/releases/download/v${version}/awesome-${version}.tar.xz"
-checksum=78264d6f012350b371e339127aca485260bc0aa935eff578ba75ce1a00e11753
+
+do_fetch() {
+	git clone https://github.com/awesomeWM/awesome.git ${wrksrc}
+}
 
 pre_configure() {
 	# Russian manpages fail to build.
